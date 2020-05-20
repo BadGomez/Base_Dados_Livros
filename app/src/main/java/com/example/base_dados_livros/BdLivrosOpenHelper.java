@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class BdLivrosOpenHelper extends SQLiteOpenHelper {
-
     public static final String NOME_BASE_DADOS = "livros.db";
     public static final int VERSAO_BASE_DADOS = 1;
 

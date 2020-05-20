@@ -1,10 +1,9 @@
 package com.example.base_dados_livros;
 
 import android.content.ContentValues;
-import android.nfc.cardemulation.CardEmulation;
 
 public class Converte {
-    public  static ContentValues categoriaToContentValue(Categoria categoria){
+    public  static ContentValues categoriaToContentValues(Categoria categoria){
         ContentValues valores = new ContentValues();
             valores.put(BdTableCategorias.CAMPO_DESCRICAO,categoria.getDescricao());
         return  valores;
@@ -17,5 +16,24 @@ public class Converte {
         categoria.setDescricao(valores.getAsString(BdTableCategorias.CAMPO_DESCRICAO));
 
         return categoria;
+    }
+
+    public static ContentValues livroToContentValues(Livro livro){
+        ContentValues valores = new ContentValues();
+
+        valores.put(BdTableLivros.CAMPO_TITULO, livro.getTitulo());
+        valores.put(BdTableLivros.CAMPO_CATEGORIA, livro.getIdCategoria());
+
+        return valores;
+    }
+
+    public static Livro contentValuesToLivro(ContentValues valores) {
+        Livro livro = new Livro ();
+
+        livro.setId(valores.getAsLong(BdTableLivros._ID));
+        livro.setTitulo(valores.getAsString(BdTableLivros.CAMPO_TITULO));
+        livro.setIdCategoria(valores.getAsLong(BdTableLivros.CAMPO_CATEGORIA));
+
+        return livro;
     }
 }
