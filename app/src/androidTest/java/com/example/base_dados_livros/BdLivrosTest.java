@@ -175,4 +175,21 @@ public class BdLivrosTest {
 
         bd.close();
     }
+
+    public static Livro cursorToLivro(Cursor cursor){
+        Livro livro = new Livro();
+
+        livro.setId(cursor.getLong(cursor.getColumnIndex(BdTableLivros._ID)));
+      //  livro.setTitulo(cursor.getString());
+    }
+
+    @Test
+    public void consegueEliminarLivros(){
+        Context appContext = getTargetContext();
+
+        BdLivrosOpenHelper openHelper = new BdLivrosOpenHelper(appContext);
+        SQLiteDatabase bdlivros = openHelper.getWritableDatabase();
+
+       // ling id = insereLivro(bdlivros, "O silêncio das ")
+    }
 }
