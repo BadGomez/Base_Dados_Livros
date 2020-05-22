@@ -1,5 +1,6 @@
 package com.example.base_dados_livros;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ListaLivroFragment extends Fragment {
 
@@ -24,29 +27,12 @@ public class ListaLivroFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.buttonNovo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                novoLivro();
-            }
-        });
+        Context context = getContext();
 
-
-        view.findViewById(R.id.buttonAlterar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alteraLivro();
-            }
-        });
-    /*
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
-        */
+        RecyclerView recyclerViewLivros = (RecyclerView) view.findViewById(R.id.recyclerViewLivros);
+        AdaptadorLivros adaptadorLivros = new AdaptadorLivros(context);
+        recyclerViewLivros.setAdapter(adaptadorLivros);
+        recyclerViewLivros.setLayoutManager(new LinearLayoutManager(context));
     }
 
     private void alteraLivro() {

@@ -176,11 +176,30 @@ public class BdLivrosTest {
         bd.close();
     }
 
-    public static Livro cursorToLivro(Cursor cursor){
-        Livro livro = new Livro();
+    public void consegueAlterarLivros(){
+        Context appContext = getTargetContext();
 
-        livro.setId(cursor.getLong(cursor.getColumnIndex(BdTableLivros._ID)));
-      //  livro.setTitulo(cursor.getString());
+        BdLivrosOpenHelper openHelper = new BdLivrosOpenHelper(appContext);
+        SQLiteDatabase bdLivros = openHelper.getWritableDatabase();
+
+        long idLivro = insereLivro(bdLivros, "O silêncio dos inocentes", "Thriller");
+
+        BdTableLivros tableLivros = new BdTableLivros(bdLivros);
+
+        Cursor cursor = tableLivros.query(BdTableLivros.TODOS_CAMPOS, BdTableLivros._ID + "=?", new String[]{ String.valueOf(idLivro) }, null, null, null);
+        assertEquals(1,cursor.getCount());
+
+        assertTrue(cursor.moveToNext());
+        Livro livro = Converte.cursorToLivro(cursor);
+        cursor.close();
+
+        assertEquals("O silêncio dos inocentes", livro.getTitulo());
+
+        livro.setTitulo("O silêncio dos inocentes");
+        int registosAfetados = tableLivros.update(Converte.livroToContentValues(livro),BdTableLivros._ID + "=?", new String[] {String.valueOf(livro.getId())} );
+        assertEquals(1, registosAfetados);
+
+        bdLivros.close();
     }
 
     @Test
@@ -190,6 +209,11 @@ public class BdLivrosTest {
         BdLivrosOpenHelper openHelper = new BdLivrosOpenHelper(appContext);
         SQLiteDatabase bdlivros = openHelper.getWritableDatabase();
 
-       // ling id = insereLivro(bdlivros, "O silêncio das ")
+       long id = insereLivro(bdlivros, "O silêncio dos inocentes","Thriller");
+
+       BdTableLivros tableLivros = new BdTableLivros(bdlivros);
+       int registosEleminados = tableLivros.delete(BdTableLivros._ID + "=?", new String[]{String.valueOf(id)});
+
+       bdlivros.close();
     }
 }

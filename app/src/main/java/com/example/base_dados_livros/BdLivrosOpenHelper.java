@@ -48,7 +48,7 @@ public class BdLivrosOpenHelper extends SQLiteOpenHelper {
         Categoria categoria = new Categoria();
         categoria.setDescricao("Ação");
         long idCatAcao = tabelaCategorias.insert(Converte.categoriaToContentValues(categoria));
-        
+
         categoria = new Categoria();
         categoria.setDescricao("Terror");
         long idCatTerror = tabelaCategorias.insert(Converte.categoriaToContentValues(categoria));
