@@ -1,6 +1,7 @@
 package com.example.base_dados_livros;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 class AdaptadorLivros extends RecyclerView.Adapter <AdaptadorLivros.ViewHolderLivro> {
     private  final Context context;
+
+    private Cursor cursor = null;
+
+    public void setCursor(Cursor cursor) {
+        this.cursor = cursor;
+    }
 
     public AdaptadorLivros(Context context ) {
         this.context = context;
@@ -97,7 +104,8 @@ class AdaptadorLivros extends RecyclerView.Adapter <AdaptadorLivros.ViewHolderLi
      */
     @Override
     public int getItemCount() {
-        return 0;
+        if(cursor == null) return 0;
+        return cursor.getCount();
     }
 
     public class ViewHolderLivro extends RecyclerView.ViewHolder {
