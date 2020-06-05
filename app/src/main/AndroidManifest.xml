@@ -19,6 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="com.example.base_dados_livros"
+            android:name=".LivrosContentProvider"
+            android:exported="false"
+            />
     </application>
 
 </manifest>

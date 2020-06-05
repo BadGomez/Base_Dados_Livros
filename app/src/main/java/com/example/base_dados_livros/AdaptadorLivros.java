@@ -17,7 +17,10 @@ class AdaptadorLivros extends RecyclerView.Adapter <AdaptadorLivros.ViewHolderLi
     private Cursor cursor = null;
 
     public void setCursor(Cursor cursor) {
-        this.cursor = cursor;
+        if(cursor != this.cursor){
+            this.cursor = cursor;
+            notifyDataSetChanged();
+        }
     }
 
     public AdaptadorLivros(Context context ) {
@@ -127,7 +130,7 @@ class AdaptadorLivros extends RecyclerView.Adapter <AdaptadorLivros.ViewHolderLi
             this.livro = livro;
 
             textViewTitulo.setText(livro.getTitulo());
-            textViewCategoria.setText(String.valueOf(livro.getIdCategoria()));
+            textViewCategoria.setText(String.valueOf(livro.getCategoria()));
         }
     }
 

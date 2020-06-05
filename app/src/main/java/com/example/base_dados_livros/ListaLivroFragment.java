@@ -23,6 +23,7 @@ import androidx.loader.content.CursorLoader;
 
 public class ListaLivroFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    public static final int ID_CURSOR_LOADER_LIVROS = 0;
     private AdaptadorLivros adaptadorLivros;
 
     @Override
@@ -44,15 +45,9 @@ public class ListaLivroFragment extends Fragment implements LoaderManager.Loader
         recyclerViewLivros.setAdapter(adaptadorLivros);
         recyclerViewLivros.setLayoutManager(new LinearLayoutManager(context));
 
-        BdLivrosOpenHelper openHelper = new BdLivrosOpenHelper(context);
-        SQLiteDatabase bdLivros = openHelper.getReadableDatabase();
-        BdTableLivros tableLivros = new BdTableLivros(bdLivros);
-        Cursor cursor = tableLivros.query(BdTableLivros.TODOS_CAMPOS, null, null, null, null, null);
+        adaptadorLivros.setCursor(null);
 
-        getActivity().startManagingCursor(cursor);
-
-        adaptadorLivros.setCursor(cursor);
-
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_LIVROS, null, this);
     }
 
     private void alteraLivro() {

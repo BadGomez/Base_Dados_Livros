@@ -146,9 +146,9 @@ public class LivrosContentProvider extends ContentProvider {
             case URI_CATEGORIAS:
                return new BdTableCategorias(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
             case URI_LIVROS:
-                return new BdTableCategorias(bd).query(projection, BdTableCategorias._ID + "=?", new String [] { id }, null, null, sortOrder);
+                return new BdTableLivros(bd).query(projection, BdTableLivros._ID + "=?", new String [] { id }, null, null, sortOrder);
             case URI_ID_CATEGORIA:
-                return new BdTableLivros(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
+                return new BdTableCategorias(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
             case URI_ID_LIVRO:
                 return new BdTableLivros(bd).query(projection, BdTableLivros._ID + "=?", new String [] { id }, null, null, sortOrder);
             default: //Uri não suportado

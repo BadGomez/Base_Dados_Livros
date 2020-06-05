@@ -187,10 +187,10 @@ public class BdLivrosTest {
 
         long idLivro = insereLivro(bdLivros, "O silêncio dos inocentes", "Thriller");
 
-        BdTableLivros tableLivros = new BdTableLivros(bdLivros);
+        BdTableLivros tabelaLivros = new BdTableLivros(bdLivros);
 
-        Cursor cursor = tableLivros.query(BdTableLivros.TODOS_CAMPOS, BdTableLivros._ID + "=?", new String[]{ String.valueOf(idLivro) }, null, null, null);
-        assertEquals(1,cursor.getCount());
+        Cursor cursor = tabelaLivros.query(BdTableLivros.TODOS_CAMPOS, BdTableLivros.CAMPO_ID_COMPLETO + "=?", new String[]{ String.valueOf(idLivro) }, null, null, null);
+        assertEquals(1, cursor.getCount());
 
         assertTrue(cursor.moveToNext());
         Livro livro = Converte.cursorToLivro(cursor);
@@ -198,8 +198,8 @@ public class BdLivrosTest {
 
         assertEquals("O silêncio dos inocentes", livro.getTitulo());
 
-        livro.setTitulo("O silêncio dos inocentes");
-        int registosAfetados = tableLivros.update(Converte.livroToContentValues(livro),BdTableLivros._ID + "=?", new String[] {String.valueOf(livro.getId())} );
+        livro.setTitulo("O mistério do quarto secreto");
+        int registosAfetados = tabelaLivros.update(Converte.livroToContentValues(livro), BdTableLivros.CAMPO_ID_COMPLETO + "=?", new String[]{String.valueOf(livro.getId())});
         assertEquals(1, registosAfetados);
 
         bdLivros.close();

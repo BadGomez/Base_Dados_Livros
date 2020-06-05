@@ -23,7 +23,7 @@ public class Converte {
         ContentValues valores = new ContentValues();
 
         valores.put(BdTableLivros.CAMPO_TITULO, livro.getTitulo());
-        valores.put(BdTableLivros.CAMPO_CATEGORIA, livro.getIdCategoria());
+        valores.put(BdTableLivros.CAMPO_ID_CATEGORIA, livro.getIdCategoria());
 
         return valores;
     }
@@ -33,7 +33,8 @@ public class Converte {
 
         livro.setId(valores.getAsLong(BdTableLivros._ID));
         livro.setTitulo(valores.getAsString(BdTableLivros.CAMPO_TITULO));
-        livro.setIdCategoria(valores.getAsLong(BdTableLivros.CAMPO_CATEGORIA));
+        livro.setIdCategoria(valores.getAsLong(BdTableLivros.CAMPO_ID_CATEGORIA));
+        livro.setCategoria(valores.getAsString(BdTableLivros.CAMPO_CATEGORIA));
 
         return livro;
     }
@@ -43,7 +44,8 @@ public class Converte {
 
         livro.setId(cursor.getLong(cursor.getColumnIndex(BdTableLivros._ID)));
         livro.setTitulo(cursor.getString(cursor.getColumnIndex(BdTableLivros.CAMPO_TITULO)));
-        livro.setIdCategoria(cursor.getLong(cursor.getColumnIndex(BdTableLivros.CAMPO_CATEGORIA)));
+        livro.setIdCategoria(cursor.getLong(cursor.getColumnIndex(BdTableLivros.CAMPO_ID_CATEGORIA)));
+        livro.setCategoria(cursor.getString(cursor.getColumnIndex(BdTableLivros.CAMPO_CATEGORIA)));
 
         return livro;
     }
