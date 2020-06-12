@@ -31,12 +31,6 @@ public class AdicionarLivroFragment extends Fragment {
         activity.setFramentoActual(this);
         activity.setMenuActual(R.menu.menu_inserir_livro);
 
-        view.findViewById(R.id.buttonCancelar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelar();
-            }
-        });
     /*
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
